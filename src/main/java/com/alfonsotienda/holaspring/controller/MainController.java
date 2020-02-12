@@ -1,9 +1,15 @@
 package com.alfonsotienda.holaspring.controller;
 
+import com.alfonsotienda.holaspring.model.Factura;
+import com.alfonsotienda.holaspring.model.FacturaRepository;
+import com.alfonsotienda.holaspring.model.Cliente;
+import com.alfonsotienda.holaspring.model.ClienteRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +36,67 @@ public class MainController {
     public String helloWorld() {
         return "Hello World";
     }
+
+// programa factura
+
+// etiqueta para llamar a un repositorio sin necesidad del "new"
+   @Autowired
+   FacturaRepository facturaRepository;
+
+    @GetMapping("/creafactura")
+    @ResponseBody
+    public ResponseEntity creafactura(             //podria ser public string y un return null
+        @RequestParam("fecha") String fecha,
+        @RequestParam("id") Integer id,
+        @RequestParam("total") Double total
+    ) {
+         Factura factura = new Factura();
+         factura.setFecha(fecha);
+         factura.setId(id);
+         factura.setTotal(total);
+         facturaRepository.save(factura);
+   
+       ResponseEntity  responseEntity = new ResponseEntity<>(HttpStatus.CREATED);   
+       
+
+       return responseEntity;
+
+
+      }
+
+      // ahora vamos con el objeto cliente 
+      @Autowired
+      ClienteRepository clientRepository;
+   
+       @GetMapping("/creacliente")
+       @ResponseBody
+       public ResponseEntity creacliente(             //podria ser public string y un return null
+           @RequestParam("nombre") String nombre,
+           @RequestParam("id") Integer id,
+           @RequestParam("total_facturacion") Double totalfacturacion,
+           @RequestParam("sociedad") String sociedad
+       ) {
+            Cliente cliente = new Cliente();
+            cliente.setNombre(nombre);
+            cliente.setId(id);
+            cliente.setTotalfacturacion(totalfacturacion);
+            cliente.setSociedad(sociedad);
+            clientRepository.save(cliente);
+      
+          ResponseEntity  responseEntity = new ResponseEntity<>(HttpStatus.CREATED);   
+          
+   
+          return responseEntity;
+   
+   
+         }
+   
+
+        
+    
+
+
+// programa calculadora
 
     @GetMapping("/calculadora")
     public ModelAndView calculadoraHTML() {
@@ -81,6 +148,9 @@ public class MainController {
         }
         return operando1 + " " + operacion + " " + operando2 + " = " + resultado;
     }
+
+
+// ejercicios
 
     @GetMapping("/insertar")
     public ModelAndView insertarHTML() {
@@ -137,6 +207,7 @@ public class MainController {
         return modelAndView;
 
     }
+// ejercicio test locura
 
     @PostMapping("/test")
     @ResponseBody
@@ -230,4 +301,6 @@ public class MainController {
         }
 
     }
+
+    
 }
