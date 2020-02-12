@@ -31,14 +31,6 @@ public class MainController {
         return "Hello World";
     }
 
-    @GetMapping("/nuevo")
-    public ModelAndView helloHTML() {
-        ModelAndView respuesta = new ModelAndView("hello");
-        String msg = "Hola Mundo html";
-        respuesta.addObject("mensaje", msg);
-        return respuesta;
-    }
-
     @GetMapping("/calculadora")
     public ModelAndView calculadoraHTML() {
         ModelAndView modelAndView = new ModelAndView("hello");
