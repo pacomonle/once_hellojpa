@@ -1,8 +1,13 @@
 package com.alfonsotienda.holaspring.model;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Factura - creamos este objeto
@@ -15,8 +20,15 @@ public class Cliente {
 
  // para indicar la primary key PK   
    @Id
-    private Integer id;
-    private String nombre;
+ // para hacer la id auto_incrment  
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
+// para hacer la id NOT NULL
+   @Column(name="id", nullable =  false , unique = true )
+	private Integer id;
+// para determinar la longitud de la cadena con un min y un max 
+	@Size(min = 5, max = 40)
+	private String nombre;
+    @Size(min = 2, max = 10)
     private String sociedad;
     private Double totalfacturacion;
 
@@ -52,29 +64,18 @@ public class Cliente {
 	public void setSociedad(String sociedad) {
 		this.sociedad = sociedad;
 	}
-	
-
-
-
-
-    
-     
-     
 
 	
-
-  // generar constructor boton derecho sourcer action - generar y seleccionar todo
+	public Cliente(Integer id, String nombre, String sociedad, Double totalfacturacion) {
+		this.id = id;
+		this.nombre = nombre;
+		this.sociedad = sociedad;
+		this.totalfacturacion = totalfacturacion;
+	}
+	
+// generar constructor boton derecho sourcer action - generar y seleccionar todo
   
-  /*
-  
-    public Factura(Integer id, String fecha, Double total) {
-        this.id = id;
-        this.fecha = fecha;
-        this.total = total;
-    }
-
-   */ 
-        
+// como hemos generado el id auto_increment no seria necesario incluirlo en el constructor 
     
 
     
