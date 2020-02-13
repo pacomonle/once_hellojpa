@@ -4,6 +4,7 @@ import com.alfonsotienda.holaspring.model.Factura;
 import com.alfonsotienda.holaspring.model.FacturaRepository;
 import com.alfonsotienda.holaspring.model.Cliente;
 import com.alfonsotienda.holaspring.model.ClienteRepository;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import org.aspectj.apache.bcel.classfile.Module.Require;
@@ -66,7 +67,7 @@ public class MainController {
 
       // ahora vamos con el objeto cliente 
       @Autowired
-      ClienteRepository clientRepository;
+      ClienteRepository clienteRepository;
    
        @GetMapping("/creacliente")
        @ResponseBody
@@ -81,7 +82,7 @@ public class MainController {
             cliente.setId(id);
             cliente.setTotalfacturacion(totalfacturacion);
             cliente.setSociedad(sociedad);
-            clientRepository.save(cliente);
+            clienteRepository.save(cliente);
       
           ResponseEntity  responseEntity = new ResponseEntity<>(HttpStatus.CREATED);   
           
@@ -91,9 +92,19 @@ public class MainController {
    
          }
    
-
+   // creamos directorio lista y trabajamos en web      
+    @GetMapping("lista")
+    public ModelAndView showListaClientes() {                       // si trabajo en consola es String
+        ModelAndView modelAndView = new ModelAndView("listaCli");   // html listaCli
         
-    
+        Iterable<Cliente> todosLosClientes = clienteRepository.findAll();
+        
+        
+        modelAndView.addObject("clientes", todosLosClientes);
+
+        return modelAndView;
+        
+    }
 
 
 // programa calculadora
