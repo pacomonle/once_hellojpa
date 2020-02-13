@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo cliente</title>
+    <style>
+        div{
+            width: max-content;
+            text-align: right;
+            }
+        input{width: 160px;}
+    </style>
+</head>
+<body>
+    <h1>Nuevo Cliente</h1>
+    <p>Introduccir los datos del nuevo cliente</p>
+    <form action="/cliente" method="POST">
+        <div>
+        <ul style="list-style: none;">
+            <li>
+                <label>Nombre: <input type="text" name="nombre"/></label> 
+            </li>
+            <li>
+                <label>Apellido: <input type="text" name="apellido"></label>
+            </li>
+            <li>
+                <label>edad: <input type="text" name="edad"></label>
+            </li>
+
+          
+        </ul>
+        <input type="submit">
+        </div>   
+    </form>
+    
+</body>
+</html>
+

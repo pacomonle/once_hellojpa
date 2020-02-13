@@ -66,7 +66,7 @@ public class MainController {
       }
 
       // ahora vamos con el objeto cliente 
-      @Autowired
+/*    @Autowired
       ClienteRepository clienteRepository;
    
        @GetMapping("/creacliente")
@@ -78,10 +78,13 @@ public class MainController {
            @RequestParam("sociedad") String sociedad
        ) {
             Cliente cliente = new Cliente();
+            
             cliente.setNombre(nombre);
             cliente.setId(id);
             cliente.setTotalfacturacion(totalfacturacion);
-            cliente.setSociedad(sociedad);
+            cliente.setSociedad(sociedad);  
+            
+            
             clienteRepository.save(cliente);
       
           ResponseEntity  responseEntity = new ResponseEntity<>(HttpStatus.CREATED);   
@@ -90,8 +93,32 @@ public class MainController {
           return responseEntity;
    
    
-         }
+         }  */
    
+         @GetMapping("/cliente")
+         @ResponseBody
+         public ModelAndView creaCliente() {
+     
+             ModelAndView modelAndView=new ModelAndView("cliente");
+             modelAndView.addObject("mensaje", "");
+             return modelAndView;
+         }
+     
+         @PostMapping("/cliente")
+         public ModelAndView clientePost(
+             @RequestParam("nombre") String nombre,
+             @RequestParam("apellido") String apellido,
+             @RequestParam("edad") Integer edad
+         ){
+             ModelAndView modelAndView=new ModelAndView("cliente");
+             Cliente cliente=new Cliente(nombre, apellido, edad);
+             ClienteRepository.save(cliente);
+     
+             return modelAndView;
+         }
+
+
+
    // creamos directorio lista y trabajamos en web      
     @GetMapping("lista")
     public ModelAndView showListaClientes() {                       // si trabajo en consola es String

@@ -37,13 +37,13 @@ public class Cliente {
     @Size(max = 40)
 	private String nombre;
    
-	@Size(min = 2, max = 10)
-	private String sociedad;
+	@Size(min = 1, max = 40)
+	private String apellido;
 	
 	// limites para numeros en este caso es facturacion pero podria ser edad por ejemplo
-	@Min(value=100)  
-	@Max(value=1000000000)
-    private Double totalfacturacion;
+	@Min(value=18)  
+	@Max(value=70)
+    private Integer edad;
 
     public Integer getId() {
 		return id;
@@ -61,28 +61,28 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public Double getTotalfacturacion() {
-		return totalfacturacion;
+	public Integer getEdad() {
+		return edad;
 	}
 
-	public void setTotalfacturacion(Double total) {
-		this.totalfacturacion = total;
+	public void setEdad(Integer edad) {
+		this.edad = edad;
 	}
       
 
-    public String getSociedad() {
-		return sociedad;
+    public String getApellido() {
+		return apellido;
 	}
 
-	public void setSociedad(String sociedad) {
-		this.sociedad = sociedad;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	
-	public Cliente( String nombre, String sociedad, Double totalfacturacion) {	
+	public Cliente( String nombre, String apellido, Integer edad) {	
 		this.nombre = nombre;
-		this.sociedad = sociedad;
-		this.totalfacturacion = totalfacturacion;
+		this.apellido = apellido;
+		this.edad = edad;
 	}
 	
 // generar constructor boton derecho sourcer action - generar y seleccionar todo
