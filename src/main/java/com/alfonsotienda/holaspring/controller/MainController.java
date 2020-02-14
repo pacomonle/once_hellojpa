@@ -6,6 +6,7 @@ import com.alfonsotienda.holaspring.model.Cliente;
 import com.alfonsotienda.holaspring.model.ClienteRepository;
 import com.alfonsotienda.holaspring.model.Factura;
 import com.alfonsotienda.holaspring.model.FacturaRepository;
+import com.alfonsotienda.holaspring.model.Producto;
 import com.alfonsotienda.holaspring.model.ProductoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

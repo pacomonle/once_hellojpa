@@ -1,4 +1,4 @@
-paquete  com.alfonsotienda.holaspring.model ;
+package  com.alfonsotienda.holaspring.model ;
 
 import java.util.ArrayList;
 import  java.util.List ;

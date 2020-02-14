@@ -1,4 +1,6 @@
-paquete  com.alfonsotienda.holaspring.model ;
+package  com.alfonsotienda.holaspring.model ;
+
+
 
 import  javax.persistence.Entity ;
 import  javax.persistence.GeneratedValue ;
