@@ -1,8 +1,13 @@
-package com.alfonsotienda.holaspring.model;
+paquete  com.alfonsotienda.holaspring.model ;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import  javax.persistence.Entity ;
+import  javax.persistence.GeneratedValue ;
+import  javax.persistence.GenerationType ;
+import  javax.persistence.Id ;
+import  javax.persistence.ManyToOne ;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  * Factura - creamos este objeto
@@ -14,12 +19,22 @@ import javax.persistence.Id;
 public class Factura {
 
  // para indicar la primary key PK   
-   @Id
+ @Id
+ @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
     private String fecha;
     
     private Double total;
+
+// el reciproco de la relacion uno a muchos - muchos a uno	
+	@ManyToOne
+	private Cliente cliente;
+	
+// el reciproco de la realacion muchos a muchos con factura-producto
+     @ManyToMany(mappedBy = "facturas")
+      private List<Producto> productos;
+   
 
 
 // generamos getters and setters con boton derecho source action - generar (seleccionamos todo)

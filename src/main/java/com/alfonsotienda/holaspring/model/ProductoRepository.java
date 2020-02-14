@@ -6,10 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClienteRepository extends CrudRepository<Cliente, Integer>{
+public interface ProductoRepository extends CrudRepository<Producto, Integer>{
 
- //   Iterable<Cliente> findByName(String name);
+ //   Iterable<Producto> findByName(String name);
     
  }
-
-

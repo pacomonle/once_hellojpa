@@ -1,13 +1,13 @@
 package com.alfonsotienda.holaspring.controller;
 
-import com.alfonsotienda.holaspring.model.Factura;
-import com.alfonsotienda.holaspring.model.FacturaRepository;
+import javax.persistence.EntityManager;
+
 import com.alfonsotienda.holaspring.model.Cliente;
 import com.alfonsotienda.holaspring.model.ClienteRepository;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.alfonsotienda.holaspring.model.Factura;
+import com.alfonsotienda.holaspring.model.FacturaRepository;
+import com.alfonsotienda.holaspring.model.ProductoRepository;
 
-import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -120,18 +120,68 @@ public class MainController {
 
 
    // creamos directorio lista y trabajamos en web      
-    @GetMapping("lista")
-    public ModelAndView showListaClientes() {                       // si trabajo en consola es String
-        ModelAndView modelAndView = new ModelAndView("listaCli");   // html listaCli
-        
-        Iterable<Cliente> todosLosClientes = clienteRepository.findAll();
-        
-        
+   @GetMapping("/lista")
+    public ModelAndView showListaClientes(){
+        ModelAndView modelAndView = new ModelAndView("listaCli");
+        Iterable<Cliente> todosLosClientes = ClienteRepository.findAll();
+
+        String todos = "";
+        for (Cliente cliente : todosLosClientes) {
+            todos = todos + cliente.getNombre()+ ", ";
+        }
         modelAndView.addObject("clientes", todosLosClientes);
+        modelAndView.addObject("todos", todos);
+        return modelAndView;
+    }   
+
+// ahora vamos con el objeto producto 
+
+    @GetMapping("/producto")
+    @ResponseBody
+    public ModelAndView creaProducto() {
+
+        ModelAndView modelAndView=new ModelAndView("producto");
+        modelAndView.addObject("mensaje", "");
+        return modelAndView;
+    }
+
+    @PostMapping("/producto")
+    public ModelAndView productoPost(
+        @RequestParam("nombre") String nombre,
+        @RequestParam("valor") Integer valor
+    ){
+        ModelAndView modelAndView=new ModelAndView("producto");
+        Producto producto = new Producto(nombre, valor);
+        ProductoRepository.save(producto);
 
         return modelAndView;
-        
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // programa calculadora

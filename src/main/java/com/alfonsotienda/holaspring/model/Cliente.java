@@ -1,18 +1,21 @@
-package com.alfonsotienda.holaspring.model;
+paquete  com.alfonsotienda.holaspring.model ;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.*;
-import javax.persistence.*;
+import  java.util.List ;
 
+import  javax.persistence.CascadeType ;
+import  javax.persistence.Column ;
+import  javax.persistence.Entity ;
+import  javax.persistence.GeneratedValue ;
+import  javax.persistence.GenerationType ;
+import  javax.persistence.Id ;
+import  javax.persistence.ManyToOne ;
+import  javax.persistence.OneToMany ;
+import  javax.persistence.Table ;
+import  javax.validation.constraints.Max ;
+import  javax.validation.constraints.Min ;
+import  javax.validation.constraints.NotNull ;
+import  javax.validation.constraints.Size ;
 
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Cliente - creamos este objeto
@@ -44,6 +47,11 @@ public class Cliente {
 	@Min(value=18)  
 	@Max(value=70)
     private Integer edad;
+
+ // realacion uno a muchos 
+ @OneToMany(mappedBy = "cliente")
+ private List<Factura> facturas;
+
 
     public Integer getId() {
 		return id;
@@ -77,6 +85,15 @@ public class Cliente {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+	
+	public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
 
 	
 	public Cliente( String nombre, String apellido, Integer edad) {	
@@ -88,7 +105,13 @@ public class Cliente {
 // generar constructor boton derecho sourcer action - generar y seleccionar todo
   
 // como hemos generado el id auto_increment no seria necesario incluirlo en el constructor 
-    
+	
+@Override
+public String toString() {
+	return "Cliente [apellido=" + apellido + ", edad=" + edad + ", id=" + id + ", nombre=" + nombre + "]";
+}
+
+
 
     
 }
