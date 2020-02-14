@@ -101,6 +101,8 @@ public class Cliente {
 		this.apellido = apellido;
 		this.edad = edad;
 	}
+	 
+	
 	
 // generar constructor boton derecho sourcer action - generar y seleccionar todo
   

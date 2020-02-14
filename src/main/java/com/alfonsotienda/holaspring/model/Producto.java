@@ -105,6 +105,12 @@ public class Producto {
 		
 	}
 
+// generamos toString
+	@Override
+	public String toString() {
+		return "Producto [facturas=" + facturas + ", id=" + id + ", nombre=" + nombre + ", valor=" + valor + "]";
+	}
+
     
  }  
   
@@ -117,4 +123,3 @@ public class Producto {
 
 
 
-}

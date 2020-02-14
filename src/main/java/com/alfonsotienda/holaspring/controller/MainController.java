@@ -96,6 +96,10 @@ public class MainController {
    
          }  */
    
+      // primero llamamos al repositorio    
+         @Autowired
+         ClienteRepository clienteRepository;     
+
          @GetMapping("/cliente")
          @ResponseBody
          public ModelAndView creaCliente() {
@@ -113,18 +117,23 @@ public class MainController {
          ){
              ModelAndView modelAndView=new ModelAndView("cliente");
              Cliente cliente=new Cliente(nombre, apellido, edad);
-             ClienteRepository.save(cliente);
-     
+             /*cliente.setNombre(nombre);
+             cliente.setApellido(apellido);
+             cliente.setEdad(edad);*/
+             clienteRepository.save(cliente);
+             
              return modelAndView;
          }
 
 
 
-   // creamos directorio lista y trabajamos en web      
+   // creamos directorio lista y trabajamos en web    
+   
+   
    @GetMapping("/lista")
     public ModelAndView showListaClientes(){
         ModelAndView modelAndView = new ModelAndView("listaCli");
-        Iterable<Cliente> todosLosClientes = ClienteRepository.findAll();
+        Iterable<Cliente> todosLosClientes = clienteRepository.findAll();
 
         String todos = "";
         for (Cliente cliente : todosLosClientes) {
@@ -136,6 +145,9 @@ public class MainController {
     }   
 
 // ahora vamos con el objeto producto 
+// llamamos primero al Repositorio
+    @Autowired
+    ProductoRepository productoRepository;  
 
     @GetMapping("/producto")
     @ResponseBody
@@ -153,7 +165,7 @@ public class MainController {
     ){
         ModelAndView modelAndView=new ModelAndView("producto");
         Producto producto = new Producto(nombre, valor);
-        ProductoRepository.save(producto);
+        productoRepository.save(producto);
 
         return modelAndView;
     }
