@@ -34,7 +34,8 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "NOMBRE", nullable = false)
+	@Column(name = "NOMBRE", nullable = false)
+	@Size(max = 100)
     private String nombre;
    
     @Column(name = "VALOR")
@@ -48,8 +49,10 @@ public class Producto {
     )
     
  // relacion prducto-factura   
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Factura> facturas;
+	@ManyToMany(cascade = CascadeType.ALL)
+	
+// iniciamos la lista con un new para evitar el caso de null	
+    private List<Factura> facturas = new ArrayList<>();
    
   
     public void addFactura(Factura factura){

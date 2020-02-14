@@ -131,6 +131,7 @@ public class MainController {
    
    
    @GetMapping("/lista")
+   
     public ModelAndView showListaClientes(){
         ModelAndView modelAndView = new ModelAndView("listaCli");
         Iterable<Cliente> todosLosClientes = clienteRepository.findAll();

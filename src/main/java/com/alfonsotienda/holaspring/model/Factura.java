@@ -34,9 +34,16 @@ public class Factura {
 	private Cliente cliente;
 	
 // el reciproco de la realacion muchos a muchos con factura-producto
-     @ManyToMany(mappedBy = "facturas")
-      private List<Producto> productos;
-   
+     @ManyToMany(mappedBy = "factura")
+      private List<Producto> productos = new ArrayList<>();
+	  
+	  public void addProducto(Producto producto){
+        if(this.productos == null){
+            this.productos = new ArrayList<>();
+        }
+        
+        this.productos.add(producto);
+    }
 
 
 // generamos getters and setters con boton derecho source action - generar (seleccionamos todo)
@@ -64,6 +71,16 @@ public class Factura {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+
+
+	public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
 
 
   // generar constructor boton derecho sourcer action - generar y seleccionar todo
